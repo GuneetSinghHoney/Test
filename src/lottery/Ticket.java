@@ -2,12 +2,19 @@ package lottery;
 
 public class Ticket
 {
-	int ticketNumber = 0;
-	int ticketSerialNumber;// Future Use
-	String buyerName;
+	//Ticket Bean 
+	
+	private int ticketNumber = 0;	
+	private int ticketSerialNumber; // Future Use
+	private String buyerName;
+	private double winningAmount=0; //If it wins
 	
 	public Ticket()
 	{
+	}
+	public double getWinningAmount()
+	{
+		return winningAmount;
 	}
 	
 	public Ticket(int ticketNumber, String buyerName) {
@@ -44,5 +51,8 @@ public class Ticket
 	public String toString() {
 		return "Ticket [ticketNumber=" + ticketNumber + ", buyerName=" + buyerName + "]";
 	}
-
+	public void setWinningAmount(double amount)
+	{
+		winningAmount = amount;
+	}
 }

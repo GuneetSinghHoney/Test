@@ -31,8 +31,11 @@
 </td>
 <td>
 <ul class = "nav nav-pills nav-stacked">
-<li><a href="/esignlive/Control?Action=buy">Buy Ticket</a></li>
+<li><a href="/esignlive/Control?Action=buy">Purchase</a></li>
 <li><a href="/esignlive/Control?Action=draw">Draw</a></li>
+<li><a href="/esignlive/Control?Action=win">Winners</a></li>
+<li><a href="/esignlive/Control?Action=reset">Reset</a></li>
+<li><a href="/esignlive/Control?Action=quit">Quit</a></li>
 </ul>
 </td>
 </tr>
@@ -41,7 +44,11 @@
 
 
 <table class="table">
-
+<thead>
+<tr>
+<th>Ticket Number</th>
+<th>Ticket Holder Name</th>
+</tr>
 <%
 HashMap<Integer,String> list = (HashMap<Integer,String>) request.getAttribute("list");
 Set set = list.entrySet();
@@ -50,12 +57,8 @@ while(iterator.hasNext()) {
    Map.Entry gun = (Map.Entry)iterator.next();
 
 %>
-<thead>
 
-<tr>
-<th>Ticket Number</th>
-<th>Ticket Holder Name</th>
-</tr>
+
 
 <tr>
 <td>
@@ -66,7 +69,7 @@ while(iterator.hasNext()) {
 
 <td>
 <h3><span class = "label label-success">
-<%=gun.getValue()%></span>
+<%=gun.getValue().toString().toUpperCase()%></span>
 </h3>
 </td>
 </tr>

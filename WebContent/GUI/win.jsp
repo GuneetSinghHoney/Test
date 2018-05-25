@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DRAW</title>
+<title>Winners</title>
 <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
       
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,50 +21,62 @@
 
 RESULTS:  
 <%
-Ticket[] t = (Ticket[]) request.getAttribute("win");
+Ticket[] t =null;
+try{
+t = (Ticket[]) request.getAttribute("win");
+}catch(Exception e)
+{
+RequestDispatcher disp = request.getRequestDispatcher("Control?Action=error");
+disp.forward(request, response);
+}
 %>
 <table>
 <tr>
 <td>
-First Ticket:
+<img src="one.png">
 </td>
 
 <td>
 <h1 class="jumbotron">
 Ticket Number:<%=t[0].getTicketNumber()%><br>
+Winner Name:<%=t[0].getBuyerName() %><br>
+Amount: <%=t[0].getWinningAmount() %>
 </h1>
 </td>
 
 </tr>
 <tr>
 <td>
-Second Ticket:
+<img src="two.png"/>
 </td>
 
 <td>
 <h1 class="jumbotron">
 Ticket Number:<%=t[1].getTicketNumber()%><br>
-
+Winner Name:<%=t[1].getBuyerName() %><br>
+Amount: <%=t[1].getWinningAmount() %>
 </h1>
 </td>
 
 </tr>
 <tr>
 <td>
-Third Ticket:
+<img src="three.png"/>
 </td>
 
 
 <td>
 <h1 class="jumbotron">
 Ticket Number:<%=t[2].getTicketNumber()%><br>
+Winner Name:<%=t[2].getBuyerName() %><br>
+Amount: <%=t[2].getWinningAmount() %>
 </h1>
 </td>
 
 </tr>
 
 </table>
-<a href=/esignlive/Control?Action=admin> Back </a>
+<h1><a href="/esignlive/Control?Action=next">Next</a></h1>
 
 </body>
 </html>

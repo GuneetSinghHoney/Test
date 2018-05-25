@@ -6,9 +6,10 @@ import java.util.Random;
 
 public class Lottery
 {
+	//Private Variables 
 	private double pot = 200;
 	private HashMap<Integer, String> hmap = new HashMap<Integer, String>();
-
+	private Ticket[] winner = null;
 	//private int initialPotvalue = 200;
 	private static Lottery obj = null;
 
@@ -17,6 +18,7 @@ public class Lottery
 		this.pot = pot;
 	}
 	
+	//Using Singleton approach.	
 	public static Lottery getInstance()
 	{
 		if(obj == null)
@@ -30,7 +32,15 @@ public class Lottery
 		}
 		
 	}
+	//Resetting the tickets.
+	public void resetTickets()
+	{
+		hmap = new HashMap<Integer, String>();
+		winner =null;
+		
+	}
 	
+	//Setters and getters.
 	public double getPot() {
 		return pot;
 	}
@@ -41,11 +51,12 @@ public class Lottery
 	}	
 	 
 	
-	 
+	//Checking if the lottery number is declared before to avoid errors. 
 	public boolean checkLotteryNumber(int lotterNumber) {
 		return hmap.containsKey(lotterNumber);		
 	}
 	
+	//Buy Tickets - Random
 	public int buyTicket(String name)
 	{
 		if(hmap.size() == 50)
@@ -64,6 +75,8 @@ public class Lottery
 		}
 	}
 
+	//Draw ticket will get tickets randomly and fill a array to be displayed.
+	//doing all the calculation calculating prizes.
 	public Ticket[] draw()
 	{
 		Ticket[] t = new Ticket[3];
@@ -84,15 +97,22 @@ public class Lottery
 				//Pay Money
 				if(i==0)
 				{
-					pot = Math.round(pot -(0.75*(halfPot)));
+					
+					double win = (0.75*halfPot);
+					tick.setWinningAmount(Math.round(win));
+					pot = Math.round(pot - win);
 				}
 				else if(i==1)
 				{
-					pot = Math.round(pot -(0.15*(halfPot)));
+					double win = (0.15*halfPot);
+					tick.setWinningAmount(Math.round(win));
+					pot = Math.round(pot - win);
 				}
 				else if(i==2)
 				{
-					pot = Math.round(pot -(0.10*(halfPot)));
+					double win = (0.10*halfPot);
+					tick.setWinningAmount(Math.round(win));
+					pot = Math.round(pot - win);
 				}
 			}
 			else
@@ -103,13 +123,22 @@ public class Lottery
 			
 			t[i] = tick;
 		}
+		winner =t;
 		return t;
 	}
 	
+	//Resetting the game
 	public void reset()
 	{
 		hmap = new HashMap<Integer,String>();
+		pot = 200;
+		winner = null;
 		
 	}
-
+	
+	//Getter
+	public Ticket[] getWinners()
+	{
+		return winner;
+	}
 }
